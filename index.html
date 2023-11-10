@@ -7,16 +7,92 @@
 </head>
 
 <body>
+    <label for="baudRate">波特率:</label>
+    <select id="baudRate">
+        <option value="1200">1200</option>
+        <option value="2400">2400</option>
+        <option value="4800">4800</option>
+        <option value="9600" selected>9600</option>
+        <option value="14400">14400</option>
+        <option value="19200">19200</option>
+        <option value="38400">38400</option>
+        <option value="43000">43000</option>
+        <option value="57600">57600</option>
+        <option value="76800">76800</option>
+        <option value="115200">115200</option>
+        <option value="128000">128000</option>
+        <option value="230400">230400</option>
+        <option value="256000">256000</option>
+        <option value="460800">460800</option>
+        <option value="921600">921600</option>
+        <option value="1382400">1382400</option>
+    </select>
+    <label for="stopBits">停止位:</label>
+    <select id="stopBits">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <label for="dataBits">数据位:</label>
+    <select id="dataBits">
+        <option value="8">8</option>
+        <option value="7">7</option>
+    </select>
+    <label for="parity">奇偶校验:</label>
+    <select id="parity">
+        <option value="none">无</option>
+        <option value="odd">奇校验</option>
+        <option value="even">偶校验</option>
+    </select>
     <button id="connectButton">连接串口</button>
+    <button id="closeButton" style="display:none;">关闭串口</button>
+    <br>
+    <label for="encoding">编码方式：</label>
+    <select id="encoding">
+        <option value="utf8" selected>UTF-8</option>
+        <option value="gbk">GBK</option>
+        <option value="big5">Big5</option>
+        <option value="shift-jis">Shift JIS</option>
+        <option value="euc-kr">EUC-KR</option>
+    </select>
+    <label for="format">显示格式：</label>
+    <select id="format">
+        <option value="hex">十六进制</option>
+        <option value="text" selected>文本</option>
+    </select>
+    <label for="newline">换行符：</label>
+    <select id="newline">
+        <option value="\r\n">回车换行CRLF</option>
+        <option value="\n">换行LF</option>
+    </select>
+    <br>
+    <input type="checkbox" id="timestampCheckbox">
+    <label for="timestampCheckbox">打印时间戳（以指定换行符断帧）</label>
     <br>
     <textarea id="output" rows="10" cols="50" disabled></textarea>
     <br>
-    <input type="text" id="input" size="45" placeholder="请输入内容">
+    <button id="saveButton">保存</button>
+    <button id="clearButton">清除</button>
+    <br>
+    <input type="text" id="input" size="45" placeholder="请输入文本">
     <button id="sendButton">发送</button>
 
+    <script>window.TextEncoder = window.TextDecoder = null;</script>
+    <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding-indexes.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding.js"></script>
     <script>
         // 获取页面上的元素
         const connectButton = document.getElementById('connectButton');
+        const closeButton = document.getElementById('closeButton');
+        const baudRate = document.getElementById('baudRate');
+        const stopBits = document.getElementById('stopBits');
+        const dataBits = document.getElementById('dataBits');
+        const parity = document.getElementById('parity');
+        const timestampCheckbox = document.getElementById('timestampCheckbox');
+        const encodingSelect = document.getElementById('encoding');
+        const formatSelect = document.getElementById('format');
+        const newlineSelect = document.getElementById('newline');
+        const saveButton = document.getElementById('saveButton');
+        const clearButton = document.getElementById('clearButton');
         const sendButton = document.getElementById('sendButton');
         const output = document.getElementById('output');
         const input = document.getElementById('input');
@@ -24,6 +100,8 @@
         let port; // 串口对象
         let debounceTimeout; // 防抖延迟定时器
         let delayTime = 500; // 延迟时间
+        let encoder = new TextEncoder(); // 编码器
+        let decoder = new TextDecoder(); // 解码器
 
         // 连接串口
         connectButton.addEventListener('click', () => {
@@ -34,18 +112,24 @@
             debounceTimeout = setTimeout(async () => {
                 try {
                     port = await navigator.serial.requestPort(); // 请求串口权限
-                    await port.open({ baudRate: 9600 }); // 打开串口连接
+                    // console.log(port.getInfo); // 获取串口信息，但当前为Web Serial API实验性功能，设备支持不完善，不用
+                    await port.open({ baudRate: baudRate.value, stopBits: stopBits.value, dataBits: dataBits.value, parity: parity.value }); // 打开串口连接
                     output.value += 'Serial port connected\n';
+                    connectButton.style.display = 'none';
+                    closeButton.style.display = 'inline-block';
+                    baudRate.disabled = true;
+                    stopBits.disabled = true;
+                    dataBits.disabled = true;
+                    parity.disabled = true;
 
                     // 监听串口数据
                     const reader = port.readable.getReader();
-                    const decoder = new TextDecoder();
-
                     let receivedData = []; // 存储接收到的数据
 
                     while (true) {
                         const { value, done } = await reader.read();
                         if (done) {
+                            reader.releaseLock();
                             break;
                         }
 
@@ -53,7 +137,38 @@
 
                         // 打印一次接收到的数据
                         setTimeout(() => {
-                            const text = decoder.decode(new Uint8Array(receivedData)); // 将接收到的数据解码为文本
+                            let text;
+                            // 根据编码方式进行解码
+                            if (formatSelect.value === 'hex') {
+                                text = receivedData.map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(' ') + ' ';
+                            } else {
+                                text = decoder.decode(new Uint8Array(receivedData));
+                            }
+                            if (timestampCheckbox.checked && receivedData.length > 0) {
+                                const now = new Date();
+                                const hh = now.getHours().toString().padStart(2, '0');
+                                const mm = now.getMinutes().toString().padStart(2, '0');
+                                const ss = now.getSeconds().toString().padStart(2, '0');
+                                const timestamp = `${hh}:${mm}:${ss}`;
+                                // 如果输出区域末尾没有换行符，则不添加时间戳
+                                if (output.value[output.value.length - 1] == '\n') {
+                                    text = '[' + timestamp + ']' + text;
+                                }
+                                // 如果text末尾是换行符，则最后一行不添加时间戳
+                                if (newlineSelect.value === "\r\n") {
+                                    if (text[text.length - 1] === '\n' && text[text.length - 2] === '\r') {
+                                        text = text.substr(0, text.length - 2).replace(/\r\n/g, '\n[' + timestamp + ']') + '\n';
+                                    } else {
+                                        text = text.replace(/\r\n/g, '\n[' + timestamp + ']');
+                                    }
+                                } else {
+                                    if (text[text.length - 1] === '\n') {
+                                        text = text.substr(0, text.length - 1).replace(/\n/g, '\n[' + timestamp + ']') + '\n';
+                                    } else {
+                                        text = text.replace(/\n/g, '\n[' + timestamp + ']');
+                                    }
+                                }
+                            }
                             output.value += text; // 将解码后的文本显示在文本框中
                             receivedData = []; // 清空接收到的数据
                         }, delayTime);
@@ -62,21 +177,82 @@
                 } catch (error) {
                     output.value += 'Error: ' + error + '\n';
                 }
+
             }, delayTime);
         });
 
         // 发送数据
-        sendButton.addEventListener('click', async () => {
+        async function sendData() {
             try {
                 const writer = port.writable.getWriter();
-                const encoder = new TextEncoder();
-                const data = encoder.encode(input.value); // 将输入框中的数据编码为Uint8Array类型
+                let data;
+                // 根据编码方式进行编码
+                if (formatSelect.value === 'hex') {
+                    data = new Uint8Array(input.value.split(' ').map(x => parseInt(x, 16)));
+                } else {
+                    data = encoder.encode(input.value);
+                }
                 await writer.write(data); // 发送编码后的数据
                 await writer.close();
-                input.value = ''; // 清空输入框
+                // input.value = ''; // 清空输入框
             } catch (error) {
                 output.value += 'Error: ' + error + '\n';
             }
+        }
+
+        sendButton.addEventListener('click', async () => {
+            await sendData();
+        });
+
+        input.addEventListener('keyup', async (event) => {
+            if (event.keyCode === 13) {
+                await sendData();
+            }
+        });
+
+        closeButton.addEventListener('click', () => {
+            // 通过刷新页面实现串口关闭
+            window.location.reload();
+        });
+
+        encodingSelect.addEventListener('change', () => {
+            const selectedEncoding = encodingSelect.value;
+            encoder = new TextEncoder(selectedEncoding, { NONSTANDARD_allowLegacyEncoding: true });
+            decoder = new TextDecoder(selectedEncoding);
+        });
+
+        formatSelect.addEventListener('change', () => {
+            const selectedFormat = formatSelect.value;
+            if (selectedFormat === 'hex') {
+                input.setAttribute('placeholder', '请输入十六进制');
+                // 将文本编码并转换为十六进制
+                input.value = Array.from(encoder.encode(input.value)).map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(' ');
+            } else {
+                input.setAttribute('placeholder', '请输入文本');
+                // 将十六进制转换为文本
+                input.value = decoder.decode(new Uint8Array(input.value.split(' ').map(x => parseInt(x, 16))));
+            }
+        });
+
+        saveButton.addEventListener('click', () => {
+            // 将显示内容保存为txt文件
+            const blob = new Blob([output.value], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            const now = new Date();
+            const yy = now.getFullYear().toString();
+            const MM = (now.getMonth() + 1).toString().padStart(2, '0');
+            const dd = now.getDate().toString().padStart(2, '0');
+            const hh = now.getHours().toString().padStart(2, '0');
+            const mm = now.getMinutes().toString().padStart(2, '0');
+            const ss = now.getSeconds().toString().padStart(2, '0');
+            const timestamp = `${yy}${MM}${dd}${hh}${mm}${ss}`;
+            link.download = `output_${timestamp}.txt`;
+            link.click();
+        });
+
+        clearButton.addEventListener('click', () => {
+            output.value = '';
         });
     </script>
 </body>
