@@ -2,6 +2,8 @@
 
 Web Serial Debugger is a web-based tool for serial communication using the Web Serial API. It allows you to connect to a serial port, send and receive data, and visualize the communication in real-time.
 
+[Try it out](https://honoka55.github.io/web-serial-debugger/)
+
 ## Features
 
 - Connect to a serial port and configure parameters (baud rate, stop bits, data bits, parity).
