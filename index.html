@@ -118,7 +118,7 @@
                 try {
                     port = await navigator.serial.requestPort(); // 请求串口权限
                     // console.log(port.getInfo); // 获取串口信息，但当前为Web Serial API实验性功能，设备支持不完善，不用
-                    await port.open({ baudRate: baudRate.value, stopBits: stopBits.value, dataBits: dataBits.value, parity: parity.value }); // 打开串口连接
+                    await port.open({ baudRate: parseInt(baudRate.value), stopBits: parseInt(stopBits.value), dataBits: parseInt(dataBits.value), parity: parity.value }); // 打开串口连接
                     output.value += 'Serial port connected\n';
                     connectButton.style.display = 'none';
                     closeButton.style.display = 'inline-block';
