@@ -80,6 +80,11 @@
     <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding-indexes.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding.js"></script>
     <script>
+        // 检查浏览器是否支持Web Serial API
+        if (!('serial' in navigator)) {
+            document.getElementsByTagName('body')[0].innerHTML = 'Web Serial API not supported.';
+        }
+
         // 获取页面上的元素
         const connectButton = document.getElementById('connectButton');
         const closeButton = document.getElementById('closeButton');
