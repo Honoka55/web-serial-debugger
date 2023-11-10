@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web串口调试工具</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <button id="connectButton">连接串口</button>
+    <br>
+    <textarea id="output" rows="10" cols="50" disabled></textarea>
+    <br>
+    <input type="text" id="input" size="45" placeholder="请输入内容">
+    <button id="sendButton">发送</button>
+
+    <script>
+        // 获取页面上的元素
+        const connectButton = document.getElementById('connectButton');
+        const sendButton = document.getElementById('sendButton');
+        const output = document.getElementById('output');
+        const input = document.getElementById('input');
+
+        let port; // 串口对象
+        let debounceTimeout; // 防抖延迟定时器
+        let delayTime = 500; // 延迟时间
+
+        // 连接串口
+        connectButton.addEventListener('click', () => {
+            // 清除之前的防抖延迟定时器
+            clearTimeout(debounceTimeout);
+
+            // 创建新的防抖延迟定时器
+            debounceTimeout = setTimeout(async () => {
+                try {
+                    port = await navigator.serial.requestPort(); // 请求串口权限
+                    await port.open({ baudRate: 9600 }); // 打开串口连接
+                    output.value += 'Serial port connected\n';
+
+                    // 监听串口数据
+                    const reader = port.readable.getReader();
+                    const decoder = new TextDecoder();
+
+                    let receivedData = []; // 存储接收到的数据
+
+                    while (true) {
+                        const { value, done } = await reader.read();
+                        if (done) {
+                            break;
+                        }
+
+                        receivedData = receivedData.concat(Array.from(value)); // 将接收到的字节添加到数组中
+
+                        // 打印一次接收到的数据
+                        setTimeout(() => {
+                            const text = decoder.decode(new Uint8Array(receivedData)); // 将接收到的数据解码为文本
+                            output.value += text; // 将解码后的文本显示在文本框中
+                            receivedData = []; // 清空接收到的数据
+                        }, delayTime);
+                    }
+
+                } catch (error) {
+                    output.value += 'Error: ' + error + '\n';
+                }
+            }, delayTime);
+        });
+
+        // 发送数据
+        sendButton.addEventListener('click', async () => {
+            try {
+                const writer = port.writable.getWriter();
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input.value); // 将输入框中的数据编码为Uint8Array类型
+                await writer.write(data); // 发送编码后的数据
+                await writer.close();
+                input.value = ''; // 清空输入框
+            } catch (error) {
+                output.value += 'Error: ' + error + '\n';
+            }
+        });
+    </script>
+</body>
+
+</html>
