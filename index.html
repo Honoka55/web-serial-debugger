@@ -156,11 +156,11 @@
                                 const ss = now.getSeconds().toString().padStart(2, '0');
                                 const timestamp = `${hh}:${mm}:${ss}`;
                                 // 如果输出区域末尾没有换行符，则不添加时间戳
-                                if (output.value[output.value.length - 1] == '\n') {
+                                if (output.value[output.value.length - 1] === '\n') {
                                     text = '[' + timestamp + ']' + text;
                                 }
                                 // 如果text末尾是换行符，则最后一行不添加时间戳
-                                if (newlineSelect.value === "\r\n") {
+                                if (newlineSelect.value === '\r\n') {
                                     if (text[text.length - 1] === '\n' && text[text.length - 2] === '\r') {
                                         text = text.substr(0, text.length - 2).replace(/\r\n/g, '\n[' + timestamp + ']') + '\n';
                                     } else {
@@ -235,7 +235,9 @@
             } else {
                 input.setAttribute('placeholder', '请输入文本');
                 // 将十六进制转换为文本
-                input.value = decoder.decode(new Uint8Array(input.value.split(' ').map(x => parseInt(x, 16))));
+                if (input.value !== '') {
+                    input.value = decoder.decode(new Uint8Array(input.value.split(' ').map(x => parseInt(x, 16))));
+                }
             }
         });
 
