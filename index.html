@@ -145,7 +145,7 @@
                             let text;
                             // 根据编码方式进行解码
                             if (formatSelect.value === 'hex') {
-                                text = receivedData.map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(' ') + receivedData.length > 0 ? ' ' : '';
+                                text = receivedData.map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(' ') + (receivedData.length > 0 ? ' ' : '');
                             } else {
                                 text = decoder.decode(new Uint8Array(receivedData));
                             }
