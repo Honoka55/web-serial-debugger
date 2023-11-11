@@ -1,6 +1,7 @@
 const i18n = {
     data: {
         'zh-hans': {
+            'title': 'Web串口调试工具',
             'baud-rate': '波特率：',
             'data-bits': '数据位：',
             'stop-bits': '停止位：',
@@ -26,6 +27,7 @@ const i18n = {
             'language-select': '语言：'
         },
         'zh-hant': {
+            'title': 'Web序列埠除錯工具',
             'baud-rate': '鮑率：',
             'data-bits': '資料位元：',
             'stop-bits': '停止位元：',
@@ -33,7 +35,7 @@ const i18n = {
             'parity-select-option-none': '無',
             'parity-select-option-odd': '奇同位',
             'parity-select-option-even': '偶同位',
-            'connect-button': '連接序列埠',
+            'connect-button': '連線到序列埠',
             'close-button': '關閉序列埠',
             'save-button': '保存',
             'clear-button': '清除',
@@ -51,6 +53,7 @@ const i18n = {
             'language-select': '語言：'
         },
         'ja': {
+            'title': 'Webシリアルデバッグツール',
             'baud-rate': 'ボーレート：',
             'data-bits': 'データビット：',
             'stop-bits': 'ストップビット：',
@@ -76,6 +79,7 @@ const i18n = {
             'language-select': '言語：'
         },
         'ko': {
+            'title': 'Web 직렬 디버거',
             'baud-rate': '보오율: ',
             'data-bits': '데이터 비트: ',
             'stop-bits': '정지 비트: ',
@@ -89,7 +93,7 @@ const i18n = {
             'clear-button': '지우기',
             'send-button': '전송',
             'input-placeholder-text': '텍스트을 입력하세요',
-            'input-placeholder-hex': '16진수를 입력하세요',
+            'input-placeholder-hex': '십육진수를 입력하세요',
             'encoding-select': '인코딩 방식: ',
             'format-select': '표시 형식: ',
             'format-select-option-hex': '십육진법',
@@ -101,6 +105,7 @@ const i18n = {
             'language-select': '언어: '
         },
         'en': {
+            'title': 'Web Serial Debugger',
             'baud-rate': 'Baud rate: ',
             'data-bits': 'Data bit: ',
             'stop-bits': 'Stop bit: ',
