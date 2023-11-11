@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <label for="baudRate">波特率：</label>
+    <label for="baudRate" data-i18n="baud-rate"></label>
     <select id="baudRate">
         <option value="1200">1200</option>
         <option value="2400">2400</option>
@@ -27,26 +27,26 @@
         <option value="921600">921600</option>
         <option value="1382400">1382400</option>
     </select>
-    <label for="stopBits">停止位：</label>
+    <label for="stopBits" data-i18n="stop-bits"></label>
     <select id="stopBits">
         <option value="1">1</option>
         <option value="2">2</option>
     </select>
-    <label for="dataBits">数据位：</label>
+    <label for="dataBits" data-i18n="data-bits"></label>
     <select id="dataBits">
         <option value="8">8</option>
         <option value="7">7</option>
     </select>
-    <label for="parity">奇偶校验：</label>
+    <label for="parity" data-i18n="parity-select"></label>
     <select id="parity">
-        <option value="none">无</option>
-        <option value="odd">奇校验</option>
-        <option value="even">偶校验</option>
+        <option value="none" data-i18n="parity-select-option-none"></option>
+        <option value="odd" data-i18n="parity-select-option-odd"></option>
+        <option value="even" data-i18n="parity-select-option-even"></option>
     </select>
-    <button id="connectButton">连接串口</button>
-    <button id="closeButton" style="display:none;">关闭串口</button>
+    <button id="connectButton" data-i18n="connect-button"></button>
+    <button id="closeButton" style="display:none;" data-i18n="close-button"></button>
     <br>
-    <label for="encoding">编码方式：</label>
+    <label for="encoding" data-i18n="encoding-select"></label>
     <select id="encoding">
         <option value="utf8" selected>UTF-8</option>
         <option value="gbk">GBK</option>
@@ -54,30 +54,40 @@
         <option value="shift-jis">Shift JIS</option>
         <option value="euc-kr">EUC-KR</option>
     </select>
-    <label for="format">显示格式：</label>
+    <label for="format" data-i18n="format-select"></label>
     <select id="format">
-        <option value="hex">十六进制</option>
-        <option value="text" selected>文本</option>
+        <option value="hex" data-i18n="format-select-option-hex"></option>
+        <option value="text" data-i18n="format-select-option-text" selected></option>
     </select>
-    <label for="newline">换行符：</label>
+    <label for="newline" data-i18n="newline-select"></label>
     <select id="newline">
-        <option value="\r\n">回车换行CRLF</option>
-        <option value="\n">换行LF</option>
+        <option value="\r\n" data-i18n="newline-select-option-crlf"></option>
+        <option value="\n" data-i18n="newline-select-option-lf"></option>
     </select>
     <br>
     <input type="checkbox" id="timestampCheckbox">
-    <label for="timestampCheckbox">打印时间戳（以指定换行符断帧）</label>
+    <label for="timestampCheckbox" data-i18n="timestamp-checkbox">）</label>
+    <label for="language" data-i18n="language-select"></label>
+    <select id="language">
+        <option value="zh-hans">简体中文</option>
+        <option value="zh-hant">繁體中文</option>
+        <option value="ja">日本語</option>
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+    </select>
     <br>
     <textarea id="output" rows="17" cols="78" disabled></textarea>
     <br>
-    <button id="saveButton">保存</button>
-    <button id="clearButton">清除</button>
+    <button id="saveButton" data-i18n="save-button"></button>
+    <button id="clearButton" data-i18n="clear-button"></button>
     <br>
-    <input type="text" id="input" size="75" placeholder="请输入文本">
-    <button id="sendButton">发送</button>
+    <input type="text" id="input" size="75" placeholder="" data-i18n="input-placeholder">
+    <button id="sendButton" data-i18n="send-button"></button>
     <br><br><br>
-    <div>Copyright © 2023 <a href="https://github.com/Honoka55">Honoka55</a> | <a href="https://github.com/Honoka55/web-serial-debugger">Repo</a></div>
+    <div>Copyright © 2023 <a href="https://github.com/Honoka55">Honoka55</a> | <a
+            href="https://github.com/Honoka55/web-serial-debugger">Repo</a></div>
 
+    <script src="i18n.js"></script>
     <script>window.TextEncoder = window.TextDecoder = null;</script>
     <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding-indexes.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding.js"></script>
@@ -98,6 +108,7 @@
         const encodingSelect = document.getElementById('encoding');
         const formatSelect = document.getElementById('format');
         const newlineSelect = document.getElementById('newline');
+        const languageSelect = document.getElementById('language');
         const saveButton = document.getElementById('saveButton');
         const clearButton = document.getElementById('clearButton');
         const sendButton = document.getElementById('sendButton');
@@ -231,16 +242,20 @@
         formatSelect.addEventListener('change', () => {
             const selectedFormat = formatSelect.value;
             if (selectedFormat === 'hex') {
-                input.setAttribute('placeholder', '请输入十六进制');
+                input.setAttribute('placeholder', i18n.getText('input-placeholder-hex'));
                 // 将文本编码并转换为十六进制
                 input.value = Array.from(encoder.encode(input.value)).map(x => x.toString(16).toUpperCase().padStart(2, '0')).join(' ');
             } else {
-                input.setAttribute('placeholder', '请输入文本');
+                input.setAttribute('placeholder', i18n.getText('input-placeholder-text'));
                 // 将十六进制转换为文本
                 if (input.value !== '') {
                     input.value = decoder.decode(new Uint8Array(input.value.split(' ').map(x => parseInt(x, 16))));
                 }
             }
+        });
+
+        languageSelect.addEventListener('change', () => {
+            i18n.setLanguage(languageSelect.value);
         });
 
         saveButton.addEventListener('click', () => {
