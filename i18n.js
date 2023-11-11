@@ -40,7 +40,7 @@ const i18n = {
             'save-button': '保存',
             'clear-button': '清除',
             'send-button': '傳送',
-            'input-placeholder-text': '請輸入文本',
+            'input-placeholder-text': '請輸入文字',
             'input-placeholder-hex': '請輸入十六進位',
             'encoding-select': '編碼方式：',
             'format-select': '顯示格式：',
