@@ -127,9 +127,6 @@ const i18n = {
         }
     },
     currentLanguage: '',
-    setData(data) {
-        this.data = data;
-    },
     setLanguage(language) {
         document.querySelector('html').setAttribute('lang', language);
         this.currentLanguage = language;
