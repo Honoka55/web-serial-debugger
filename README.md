@@ -4,6 +4,10 @@ Web Serial Debugger is a web-based tool for serial communication using the Web S
 
 [Try it out](https://honoka55.github.io/web-serial-debugger/)
 
+## Requirements
+
+- **Browser Compatibility:** Chromium-based desktop browsers (version 89 or later) are required.
+
 ## Features
 
 - Connect to a serial port and configure parameters (baud rate, stop bits, data bits, parity).
@@ -42,6 +46,6 @@ Web Serial Debugger is a web-based tool for serial communication using the Web S
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Acknowledgments
+## Feedback
 
 If you encounter any issues or have suggestions for improvement, feel free to [open an issue](https://github.com/Honoka55/web-serial-debugger/issues).
