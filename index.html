@@ -188,6 +188,7 @@
                                 }
                             }
                             output.value += text; // 将解码后的文本显示在文本框中
+                            output.scrollTop = output.scrollHeight; // 滚动到文本框底部
                             receivedData = []; // 清空接收到的数据
                         }, delayTime);
                     }
