@@ -2,7 +2,8 @@
 
 :root {
     --zh-hans-font-family: 'Source Han Sans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Heiti SC', SimHei;
-    --zh-hant-font-family: 'Source Han Sans', 'Noto Sans TC', 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei', 'Heiti TC';
+    --zh-hk-font-family: 'Source Han Sans', 'Noto Sans HK', 'PingFang HK', 'Hiragino Sans CNS', 'Microsoft JhengHei', 'Heiti TC';
+    --zh-tw-font-family: 'Source Han Sans', 'Noto Sans TC', 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei', 'Heiti TC';
     --ja-font-family: 'Source Han Sans', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Yu Gothic', 'MS PGothic';
     --ko-font-family: 'Source Han Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', NanumBarunGothic, 'Malgun Gothic', Dotum;
     --en-font-family: 'Source Han Sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial;
@@ -26,12 +27,20 @@ input:lang(zh-hans) {
     font-family: Andika, var(--zh-hans-font-family), sans-serif;
 }
 
-h1:lang(zh-hant),
-label:lang(zh-hant),
-select:lang(zh-hant),
-button:lang(zh-hant),
-input:lang(zh-hant) {
-    font-family: Andika, var(--zh-hant-font-family), sans-serif;
+h1:lang(zh-hk),
+label:lang(zh-hk),
+select:lang(zh-hk),
+button:lang(zh-hk),
+input:lang(zh-hk) {
+    font-family: Andika, var(--zh-hk-font-family), sans-serif;
+}
+
+h1:lang(zh-tw),
+label:lang(zh-tw),
+select:lang(zh-tw),
+button:lang(zh-tw),
+input:lang(zh-tw) {
+    font-family: Andika, var(--zh-tw-font-family), sans-serif;
 }
 
 h1:lang(ja),
@@ -82,8 +91,12 @@ textarea:lang(zh-hans) {
     font-family: 'Sarasa Mono SC', 'Source Han Mono', var(--code-font-family), var(--zh-hans-font-family);
 }
 
-textarea:lang(zh-hant) {
-    font-family: 'Sarasa Mono TC', 'Source Han Mono', var(--code-font-family), var(--zh-hant-font-family);
+textarea:lang(zh-hk) {
+    font-family: 'Sarasa Mono HC', 'Source Han Mono', var(--code-font-family), var(--zh-hk-font-family);
+}
+
+textarea:lang(zh-tw) {
+    font-family: 'Sarasa Mono TC', 'Source Han Mono', var(--code-font-family), var(--zh-tw-font-family);
 }
 
 textarea:lang(ja),

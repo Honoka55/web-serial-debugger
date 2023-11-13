@@ -26,7 +26,33 @@ const i18n = {
             'timestamp-checkbox': '打印时间戳',
             'language-select': '语言：'
         },
-        'zh-hant': {
+        'zh-hk': {
+            'title': 'Web串行埠除錯工具',
+            'baud-rate': '波特率：',
+            'data-bits': '數據位元：',
+            'stop-bits': '停止位元：',
+            'parity-select': '奇偶檢測：',
+            'parity-select-option-none': '無',
+            'parity-select-option-odd': '奇檢測',
+            'parity-select-option-even': '偶檢測',
+            'connect-button': '連接串行埠',
+            'close-button': '關閉串行埠',
+            'save-button': '保存',
+            'clear-button': '清除',
+            'send-button': '傳送',
+            'input-placeholder-text': '請輸入文字',
+            'input-placeholder-hex': '請輸入十六進制',
+            'encoding-select': '編碼方式：',
+            'format-select': '顯示格式：',
+            'format-select-option-hex': '十六進制',
+            'format-select-option-text': '文字',
+            'newline-select': '換行符：',
+            'newline-select-option-crlf': '回車換行CRLF',
+            'newline-select-option-lf': '換行LF',
+            'timestamp-checkbox': '列印時間標記',
+            'language-select': '語言：'
+        },
+        'zh-tw': {
             'title': 'Web序列埠除錯工具',
             'baud-rate': '鮑率：',
             'data-bits': '資料位元：',
@@ -49,7 +75,7 @@ const i18n = {
             'newline-select': '換行符：',
             'newline-select-option-crlf': '回車換行CRLF',
             'newline-select-option-lf': '換行LF',
-            'timestamp-checkbox': '列印時間戳',
+            'timestamp-checkbox': '列印時戳',
             'language-select': '語言：'
         },
         'ja': {
