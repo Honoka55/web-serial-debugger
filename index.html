@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-    <textarea id="output" rows="17" cols="78" disabled></textarea>
+    <textarea id="output" disabled></textarea>
     <div class="item-container">
         <button id="saveButton" data-i18n="save-button"></button>
         <button id="clearButton" data-i18n="clear-button"></button>
@@ -221,6 +221,7 @@
 
                 } catch (error) {
                     output.value += 'Error: ' + error + '\n';
+                    output.scrollTop = output.scrollHeight;
                 }
 
             }, delayTime);
@@ -242,6 +243,7 @@
                 // input.value = ''; // 清空输入框
             } catch (error) {
                 output.value += 'Error: ' + error + '\n';
+                output.scrollTop = output.scrollHeight;
             }
         }
 
