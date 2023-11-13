@@ -4,89 +4,115 @@
 <head>
     <title data-i18n="title"></title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <label for="baudRate" data-i18n="baud-rate"></label>
-    <select id="baudRate">
-        <option value="1200">1200</option>
-        <option value="2400">2400</option>
-        <option value="4800">4800</option>
-        <option value="9600" selected>9600</option>
-        <option value="14400">14400</option>
-        <option value="19200">19200</option>
-        <option value="38400">38400</option>
-        <option value="43000">43000</option>
-        <option value="57600">57600</option>
-        <option value="76800">76800</option>
-        <option value="115200">115200</option>
-        <option value="128000">128000</option>
-        <option value="230400">230400</option>
-        <option value="256000">256000</option>
-        <option value="460800">460800</option>
-        <option value="921600">921600</option>
-        <option value="1382400">1382400</option>
-    </select>
-    <label for="stopBits" data-i18n="stop-bits"></label>
-    <select id="stopBits">
-        <option value="1">1</option>
-        <option value="2">2</option>
-    </select>
-    <label for="dataBits" data-i18n="data-bits"></label>
-    <select id="dataBits">
-        <option value="8">8</option>
-        <option value="7">7</option>
-    </select>
-    <label for="parity" data-i18n="parity-select"></label>
-    <select id="parity">
-        <option value="none" data-i18n="parity-select-option-none"></option>
-        <option value="odd" data-i18n="parity-select-option-odd"></option>
-        <option value="even" data-i18n="parity-select-option-even"></option>
-    </select>
-    <button id="connectButton" data-i18n="connect-button"></button>
-    <button id="closeButton" style="display:none;" data-i18n="close-button"></button>
-    <br>
-    <label for="encoding" data-i18n="encoding-select"></label>
-    <select id="encoding">
-        <option value="utf8" selected>UTF-8</option>
-        <option value="gbk">GBK</option>
-        <option value="big5">Big5</option>
-        <option value="shift-jis">Shift JIS</option>
-        <option value="euc-kr">EUC-KR</option>
-    </select>
-    <label for="format" data-i18n="format-select"></label>
-    <select id="format">
-        <option value="hex" data-i18n="format-select-option-hex"></option>
-        <option value="text" data-i18n="format-select-option-text" selected></option>
-    </select>
-    <label for="newline" data-i18n="newline-select"></label>
-    <select id="newline">
-        <option value="\r\n" data-i18n="newline-select-option-crlf"></option>
-        <option value="\n" data-i18n="newline-select-option-lf"></option>
-    </select>
-    <br>
-    <input type="checkbox" id="timestampCheckbox">
-    <label for="timestampCheckbox" data-i18n="timestamp-checkbox">）</label>
-    <label for="language" data-i18n="language-select"></label>
-    <select id="language">
-        <option value="zh-hans">简体中文</option>
-        <option value="zh-hant">繁體中文</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-        <option value="en">English</option>
-    </select>
-    <br>
+    <h1 data-i18n="title"></h1>
+    <div>
+        <div class="settings">
+            <div class="item-container">
+                <label for="baudRate" data-i18n="baud-rate"></label>
+                <select id="baudRate">
+                    <option value="1200">1200</option>
+                    <option value="2400">2400</option>
+                    <option value="4800">4800</option>
+                    <option value="9600" selected>9600</option>
+                    <option value="14400">14400</option>
+                    <option value="19200">19200</option>
+                    <option value="38400">38400</option>
+                    <option value="43000">43000</option>
+                    <option value="57600">57600</option>
+                    <option value="76800">76800</option>
+                    <option value="115200">115200</option>
+                    <option value="128000">128000</option>
+                    <option value="230400">230400</option>
+                    <option value="256000">256000</option>
+                    <option value="460800">460800</option>
+                    <option value="921600">921600</option>
+                    <option value="1382400">1382400</option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label for="stopBits" data-i18n="stop-bits"></label>
+                <select id="stopBits">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label for="dataBits" data-i18n="data-bits"></label>
+                <select id="dataBits">
+                    <option value="8">8</option>
+                    <option value="7">7</option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label for="parity" data-i18n="parity-select"></label>
+                <select id="parity">
+                    <option value="none" data-i18n="parity-select-option-none"></option>
+                    <option value="odd" data-i18n="parity-select-option-odd"></option>
+                    <option value="even" data-i18n="parity-select-option-even"></option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label></label>
+                <button id="connectButton" data-i18n="connect-button"></button>
+                <button id="closeButton" style="display:none;" data-i18n="close-button"></button>
+            </div>
+        </div>
+        <div class="settings">
+            <div class="item-container">
+                <label for="encoding" data-i18n="encoding-select"></label>
+                <select id="encoding">
+                    <option value="utf8" selected>UTF-8</option>
+                    <option value="gbk">GBK</option>
+                    <option value="big5">Big5</option>
+                    <option value="shift-jis">Shift JIS</option>
+                    <option value="euc-kr">EUC-KR</option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label for="format" data-i18n="format-select"></label>
+                <select id="format">
+                    <option value="hex" data-i18n="format-select-option-hex"></option>
+                    <option value="text" data-i18n="format-select-option-text" selected></option>
+                </select>
+            </div>
+            <div class="item-container">
+                <label for="newline" data-i18n="newline-select"></label>
+                <select id="newline">
+                    <option value="\r\n" data-i18n="newline-select-option-crlf"></option>
+                    <option value="\n" data-i18n="newline-select-option-lf"></option>
+                </select>
+            </div>
+            <div class="item-container">
+                <input type="checkbox" id="timestampCheckbox">
+                <label for="timestampCheckbox" data-i18n="timestamp-checkbox">）</label>
+            </div>
+            <div class="item-container">
+                <label for="language" data-i18n="language-select"></label>
+                <select id="language">
+                    <option value="zh-hans">简体中文</option>
+                    <option value="zh-hant">繁體中文</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <textarea id="output" rows="17" cols="78" disabled></textarea>
-    <br>
-    <button id="saveButton" data-i18n="save-button"></button>
-    <button id="clearButton" data-i18n="clear-button"></button>
-    <br>
-    <input type="text" id="input" size="75" placeholder="" data-i18n="input-placeholder">
-    <button id="sendButton" data-i18n="send-button"></button>
-    <br><br><br>
-    <div>Copyright © 2023 <a href="https://github.com/Honoka55">Honoka55</a> | <a
+    <div class="item-container">
+        <button id="saveButton" data-i18n="save-button"></button>
+        <button id="clearButton" data-i18n="clear-button"></button>
+    </div>
+    <div class="item-container">
+        <input type="text" id="input" size="75" placeholder="" data-i18n="input-placeholder">
+        <button id="sendButton" data-i18n="send-button"></button>
+    </div>
+    <div class="item-container">Copyright © 2023 <a href="https://github.com/Honoka55">Honoka55</a> | <a
             href="https://github.com/Honoka55/web-serial-debugger">Repo</a></div>
-
     <script src="i18n.js"></script>
     <script>window.TextEncoder = window.TextDecoder = null;</script>
     <script src="https://cdn.jsdelivr.net/gh/inexorabletash/text-encoding@master/lib/encoding-indexes.js"></script>

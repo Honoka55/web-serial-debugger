@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --zh-hans-font-family: 'Source Han Sans', 'Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Heiti SC', SimHei;
+    --zh-hant-font-family: 'Source Han Sans', 'Noto Sans TC', 'PingFang TC', 'Hiragino Sans CNS', 'Microsoft JhengHei', 'Heiti TC';
+    --ja-font-family: 'Source Han Sans', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', 'Meiryo', 'Yu Gothic', 'MS PGothic';
+    --ko-font-family: 'Source Han Sans', 'Noto Sans KR', 'Apple SD Gothic Neo', NanumBarunGothic, 'Malgun Gothic', Dotum;
+    --en-font-family: 'Source Han Sans', 'Noto Sans', 'Helvetica Neue', Helvetica, Arial;
+    --code-font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+}
+
+body {
+    background-color: #303030;
+    padding: 3px 5px;
+    font-size: 1.1em;
+    color: #ecf0f1;
+    text-align: center;
+    font-family: Andika, var(--en-font-family), sans-serif;
+}
+
+h1:lang(zh-hans),
+label:lang(zh-hans),
+select:lang(zh-hans),
+button:lang(zh-hans),
+input:lang(zh-hans) {
+    font-family: Andika, var(--zh-hans-font-family), sans-serif;
+}
+
+h1:lang(zh-hant),
+label:lang(zh-hant),
+select:lang(zh-hant),
+button:lang(zh-hant),
+input:lang(zh-hant) {
+    font-family: Andika, var(--zh-hant-font-family), sans-serif;
+}
+
+h1:lang(ja),
+label:lang(ja),
+select:lang(ja),
+button:lang(ja),
+input:lang(ja) {
+    font-family: Andika, var(--ja-font-family), sans-serif;
+}
+
+h1:lang(ko),
+label:lang(ko),
+select:lang(ko),
+button:lang(ko),
+input:lang(ko) {
+    font-family: Andika, var(--ko-font-family), sans-serif;
+}
+
+h1:lang(en),
+label:lang(en),
+select:lang(en),
+button:lang(en),
+input:lang(en) {
+    font-family: Andika, var(--en-font-family), sans-serif;
+}
+
+textarea {
+    width: 65%;
+    height: 360px;
+    margin: auto;
+    display: block;
+    padding: 3px 5px;
+    border-radius: 0;
+    appearance: none;
+    background-color: #3b3b3b;
+    color: #ecf0f1;
+    outline: 1px solid #d19ffe;
+    resize: none;
+}
+
+@media (max-width: 768px) {
+    textarea {
+        width: 98%;
+    }
+}
+
+textarea:lang(zh-hans) {
+    font-family: 'Sarasa Mono SC', 'Source Han Mono', var(--code-font-family), var(--zh-hans-font-family);
+}
+
+textarea:lang(zh-hant) {
+    font-family: 'Sarasa Mono TC', 'Source Han Mono', var(--code-font-family), var(--zh-hant-font-family);
+}
+
+textarea:lang(ja),
+textarea:lang(en) {
+    font-family: 'Sarasa Mono J', 'Source Han Mono', var(--code-font-family), var(--ja-font-family);
+}
+
+textarea:lang(ko) {
+    font-family: 'Sarasa Mono K', 'Source Han Mono', var(--code-font-family), var(--ko-font-family);
+}
+
+a {
+    box-shadow: 0 -2px rgba(189, 195, 199, 0.5) inset;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #ecf0f1;
+}
+
+a:hover {
+    cursor: pointer;
+    box-shadow: 0px -1.85rem 0px rgba(189, 195, 199, 0.7) inset;
+}
+
+button {
+    padding: 5px 8px;
+    border-radius: 0;
+    cursor: pointer;
+    border: 1px solid #d19ffe;
+    font-weight: 700;
+    font-size: 13px;
+    background-color: #363169;
+    color: #d19ffe;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+    -webkit-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+    line-height: 1.1;
+}
+
+button:hover {
+    background-color: #ddc2f5;
+    color: #363169;
+}
+
+#input {
+    width: calc(65% - 50px);
+}
+
+label {
+    width: 180px;
+    display: inline-block;
+    text-align: right;
+}
+
+.item-container {
+    text-align: center;
+    height: 32px;
+}
+
+select {
+    width: 120px;
+}
+
+#timestampCheckbox {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-left: 218px;
+    vertical-align: middle;
+}
+
+label[for='timestampCheckbox'] {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 2px 0;
+    font-weight: 600;
+}
+
+.settings {
+    display: inline-block;
+    text-align: left;
+}

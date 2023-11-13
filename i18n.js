@@ -23,7 +23,7 @@ const i18n = {
             'newline-select': '换行符：',
             'newline-select-option-crlf': '回车换行CRLF',
             'newline-select-option-lf': '换行LF',
-            'timestamp-checkbox': '打印时间戳（以指定换行符断帧）',
+            'timestamp-checkbox': '打印时间戳',
             'language-select': '语言：'
         },
         'zh-hant': {
@@ -49,7 +49,7 @@ const i18n = {
             'newline-select': '換行符：',
             'newline-select-option-crlf': '回車換行CRLF',
             'newline-select-option-lf': '換行LF',
-            'timestamp-checkbox': '列印時間戳（以指定換行符分割訊框）',
+            'timestamp-checkbox': '列印時間戳',
             'language-select': '語言：'
         },
         'ja': {
@@ -61,8 +61,8 @@ const i18n = {
             'parity-select-option-none': 'なし',
             'parity-select-option-odd': '奇数',
             'parity-select-option-even': '偶数',
-            'connect-button': 'シリアルポートに接続',
-            'close-button': 'シリアルポートを閉じる',
+            'connect-button': 'ポートに接続',
+            'close-button': 'ポートを閉じる',
             'save-button': '保存',
             'clear-button': 'クリア',
             'send-button': '送信',
@@ -75,7 +75,7 @@ const i18n = {
             'newline-select': '改行コード：',
             'newline-select-option-crlf': 'CRLF',
             'newline-select-option-lf': 'LF',
-            'timestamp-checkbox': 'タイムスタンプ出力（指定された改行コードで区切る）',
+            'timestamp-checkbox': 'タイムスタンプ出力',
             'language-select': '言語：'
         },
         'ko': {
@@ -101,7 +101,7 @@ const i18n = {
             'newline-select': '개행 문자: ',
             'newline-select-option-crlf': 'CRLF',
             'newline-select-option-lf': 'LF',
-            'timestamp-checkbox': '타임스탬프 출력 (지정된 개행 코드로 구분)',
+            'timestamp-checkbox': '타임스탬프 출력',
             'language-select': '언어: '
         },
         'en': {
@@ -113,8 +113,8 @@ const i18n = {
             'parity-select-option-none': 'None',
             'parity-select-option-odd': 'Odd',
             'parity-select-option-even': 'Even',
-            'connect-button': 'Connect serial port',
-            'close-button': 'Close serial port',
+            'connect-button': 'Connect port',
+            'close-button': 'Close port',
             'save-button': 'Save',
             'clear-button': 'Clear',
             'send-button': 'Send',
@@ -127,7 +127,7 @@ const i18n = {
             'newline-select': 'Newline: ',
             'newline-select-option-crlf': 'CRLF',
             'newline-select-option-lf': 'LF',
-            'timestamp-checkbox': 'Print timestamp (frame break with specified newline)',
+            'timestamp-checkbox': 'Print timestamp',
             'language-select': 'Language: '
         }
     },
