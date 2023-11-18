@@ -32,7 +32,7 @@ Web Serial Debugger is a web-based tool for serial communication using the Web S
 - **Stop Bits:** Choose the number of stop bits.
 - **Data Bits:** Choose the number of data bits.
 - **Parity:** Select the parity option (none, odd, even).
-- **Encoding:** Choose the text encoding (UTF-8, GBK, Big5, Shift JIS, EUC-KR).
+- **Encoding:** Choose the text encoding (UTF-8, GB18030, Big5, Shift JIS, EUC-KR).
 - **Display Format:** Choose the display format (text or hexadecimal).
 - **Newline:** Select the newline character for formatting.
 
